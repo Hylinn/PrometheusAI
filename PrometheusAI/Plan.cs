@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace PrometheusAI
 {
-    public interface Planner
+    public interface Plan
     {
-        Plan Plan(State startState, State endState);
+
     }
 }

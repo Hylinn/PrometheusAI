@@ -8,6 +8,12 @@ namespace PrometheusAI
 {
     public interface Activity
     {
+        void Perform(State state);
 
+        bool CanPerform(State state);
+
+        State Outcome(State state);
+
+        float GetCost();
     }
 }
