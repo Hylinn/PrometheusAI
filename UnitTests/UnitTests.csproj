@@ -52,6 +52,9 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="tests\ActivityTests.cs" />
+    <Compile Include="tests\FakeState.cs" />
+    <Compile Include="tests\TestActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PrometheusAI\PrometheusAI.csproj">
@@ -59,9 +62,7 @@
       <Name>PrometheusAI</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="tests\" />
-  </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

@@ -1,19 +1,42 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PrometheusAI
 {
-    public interface Activity
+    public abstract class Activity
     {
-        void Perform(State state);
+        public void Perform(State state)
+        {
+            ApplyContextEffect(state);
+            ApplyEffect(state);
+        }
 
-        bool CanPerform(State state);
+        public bool CanPerform(State state)
+        {
+            return IsValidContextPrecondition(state) &&
+                   IsValidPrecondition(state);
+        }
 
-        State Outcome(State state);
+        public State Outcome(State state)
+        {
+            if (state == null) throw new ArgumentNullException("Argument for Activity.Outcome(State) cannot be null");
 
-        float GetCost();
+            State outcome = state;
+
+            ApplyContextEffect(outcome);
+            ApplyEffect(outcome);
+
+            return outcome;
+        }
+
+        public virtual float GetCost() { return 1.0F; }
+
+        protected abstract State Precondition { get; }
+        protected abstract State Effect       { get; }
+
+        protected virtual bool IsValidContextPrecondition(State startState) { return true; }
+        protected virtual bool IsValidPrecondition(State startState) { return startState.Contains(Precondition); }
+
+        protected virtual void ApplyContextEffect(State startState) { }
+        protected virtual void ApplyEffect(State startState) { startState.Apply(Effect); }
     }
 }

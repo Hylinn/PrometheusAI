@@ -19,5 +19,9 @@ namespace PrometheusAI
         bool HasProperty(string key);
         
         State Differences(State state);
+
+        bool Contains(State subState);
+
+        void Apply(State applyState);
     }
 }
